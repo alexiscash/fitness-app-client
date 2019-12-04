@@ -1,26 +1,39 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  constructor() {
+    super();
+
+    this.state = {
+      workouts: [{loading: 'loading'}]
+    }
+  }
+
+  componentDidMount() {
+    fetch('http://localhost:3000/users/1', {
+      method: 'PATCH',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        id: 1,
+        user_name: 'swag boiiiii'
+      })
+    })
+    .then(res => res.json())
+    .then(console.log);
+  }
+
+  render() {
+    console.log(this.state);
+    return (
+      <div>
+        ayy lmao
+      </div>
+    )
+   
+  }
 }
 
 export default App;
